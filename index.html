@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10231f">
+  <title>Kimyoviy Tenglashtirish</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="background-glow"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">⚗️</div>
+      <div>
+        <h1>CHEM<span>LAB</span></h1>
+        <small>KIMYO LABORATORIYASI</small>
+      </div>
+    </div>
+
+    <div class="header-stats">
+      <div class="stat">
+        <span>⭐</span>
+        <div><small>BALL</small><b id="score">0</b></div>
+      </div>
+      <div class="stat">
+        <span>🏆</span>
+        <div><small>REKORD</small><b id="record">0</b></div>
+      </div>
+      <div class="stat">
+        <span>⏱️</span>
+        <div><small>VAQT</small><b id="timer">05:00</b></div>
+      </div>
+      <button id="soundBtn" class="icon-btn" title="Ovoz">🔊</button>
+    </div>
+  </header>
+
+  <main class="main-layout">
+
+    <aside class="side-panel">
+      <div class="panel-title">
+        <span>🧬</span>
+        <div>
+          <h2>Laboratoriya</h2>
+          <small>Kimyoviy tajribalar</small>
+        </div>
+      </div>
+
+      <div class="level-card">
+        <small>JORIY BOSQICH</small>
+        <div class="level-number" id="level">1</div>
+        <div class="progress-track">
+          <div id="progressFill"></div>
+        </div>
+        <small id="progressText">0 / 10 topshiriq</small>
+      </div>
+
+      <div class="lab-info">
+        <h3>📋 Qoidalar</h3>
+        <p>1. Reaksiyani diqqat bilan o‘qi.</p>
+        <p>2. Formulalar oldiga koeffitsiyent yoz.</p>
+        <p>3. Atomlar sonini ikki tomonda tenglashtir.</p>
+        <p>4. Javobni tekshir!</p>
+      </div>
+
+      <div class="lab-info">
+        <h3>🧪 Atomlar</h3>
+        <div class="element-row"><span class="element-dot hydrogen"></span> H — Vodorod</div>
+        <div class="element-row"><span class="element-dot oxygen"></span> O — Kislorod</div>
+        <div class="element-row"><span class="element-dot carbon"></span> C — Uglerod</div>
+        <div class="element-row"><span class="element-dot nitrogen"></span> N — Azot</div>
+        <div class="element-row"><span class="element-dot metal"></span> Boshqa elementlar</div>
+      </div>
+
+      <button class="side-button" id="helpBtn">💡 Yordam olish</button>
+      <button class="side-button secondary" id="restartBtn">↻ Qayta boshlash</button>
+    </aside>
+
+    <section class="game-area">
+      <div class="welcome">
+        <div>
+          <div class="eyebrow">● TAJRIBA JARAYONI</div>
+          <h2>Reaksiyani <span>tenglashtir!</span></h2>
+          <p>Kimyoviy tenglamadagi noma'lum koeffitsiyentlarni toping.</p>
+        </div>
+        <div class="flask-icon">⚗️</div>
+      </div>
+
+      <div class="experiment-card">
+        <div class="experiment-header">
+          <div>
+            <span class="tag" id="difficultyTag">O‘RTA</span>
+            <h3 id="questionNumber">TAJRIBA № 01</h3>
+          </div>
+          <div class="experiment-status">
+            <span class="pulse"></span>
+            FAOL
+          </div>
+        </div>
+
+        <div class="reaction-label">KIMYOVIY REAKSIYA</div>
+
+        <div class="equation" id="equation">
+          <div class="formula-part">
+            <input class="coefficient" data-coeff="0" type="number" min="1" max="99" value="1" aria-label="Birinchi koeffitsiyent">
+            <span class="formula">H<sub>2</sub></span>
+          </div>
+          <span class="operator">+</span>
+          <div class="formula-part">
+            <input class="coefficient" data-coeff="1" type="number" min="1" max="99" value="1" aria-label="Ikkinchi koeffitsiyent">
+            <span class="formula">O<sub>2</sub></span>
+          </div>
+          <span class="arrow">→</span>
+          <div class="formula-part">
+            <input class="coefficient" data-coeff="2" type="number" min="1" max="99" value="1" aria-label="Uchinchi koeffitsiyent">
+            <span class="formula">H<sub>2</sub>O</span>
+          </div>
+        </div>
+
+        <div class="atom-check">
+          <h3>⚖️ Atomlar nazorati</h3>
+          <div class="atom-columns">
+            <div class="atom-side">
+              <small>CHAP TOMON</small>
+              <div id="leftAtoms" class="atom-counts">H: 2 &nbsp; O: 2</div>
+            </div>
+            <div class="balance-icon">⇄</div>
+            <div class="atom-side">
+              <small>O‘NG TOMON</small>
+              <div id="rightAtoms" class="atom-counts">H: 2 &nbsp; O: 1</div>
+            </div>
+          </div>
+          <div id="balanceMessage" class="balance-message">Koeffitsiyentlarni o‘zgartiring.</div>
+        </div>
+
+        <div class="action-row">
+          <button class="action-button hint-button" id="hintBtn">💡 Ishora</button>
+          <button class="action-button check-button" id="checkBtn">✓ TEKSHIRISH</button>
+        </div>
+
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+
+        <div class="next-row">
+          <span id="questionProgress">1 / 10</span>
+          <button id="nextBtn" disabled>Keyingi tajriba →</button>
+        </div>
+      </div>
+
+      <div class="bottom-cards">
+        <div class="mini-card">
+          <span>🧫</span>
+          <div><small>REAKSIYALAR</small><b id="totalQuestions">10 ta</b></div>
+        </div>
+        <div class="mini-card">
+          <span>✅</span>
+          <div><small>TO‘G‘RI JAVOB</small><b id="correctCount">0</b></div>
+        </div>
+        <div class="mini-card">
+          <span>💎</span>
+          <div><small>MUKOFOT</small><b id="reward">0 XP</b></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="modal" id="helpModal">
+    <div class="modal-box">
+      <button class="modal-close" data-close="helpModal">×</button>
+      <div class="modal-icon">💡</div>
+      <h2>Kimyoviy tenglashtirish</h2>
+      <p>Kimyoviy tenglamada chap va o‘ng tomondagi har bir element atomlari soni teng bo‘lishi kerak.</p>
+      <div class="example">
+        <b>Misol:</b>
+        <div>2H₂ + O₂ → 2H₂O</div>
+      </div>
+      <p><b>Eslatma:</b> Formulaning pastidagi kichik sonlarni o‘zgartirmang. Faqat formula oldidagi koeffitsiyentlarni o‘zgartiring.</p>
+      <button class="primary-button" data-close="helpModal">Tushundim</button>
+    </div>
+  </div>
+
+  <div class="modal" id="resultModal">
+    <div class="modal-box result-box">
+      <div class="modal-icon">🏆</div>
+      <h2 id="resultTitle">Ajoyib natija!</h2>
+      <p id="resultText">Tajriba yakunlandi.</p>
+      <div class="result-score">⭐ <span id="finalScore">0</span> ball</div>
+      <button class="primary-button" id="playAgainBtn">Qayta o‘ynash</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <footer>CHEMLAB · KIMYO BILIMDONLARI UCHUN</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
